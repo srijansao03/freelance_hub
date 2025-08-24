@@ -15,7 +15,7 @@ import os
 import dj_database_url
 
 # Allow Railway domain
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.railway.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.railway.app', 'freelance-hub.up.railway.app']
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
