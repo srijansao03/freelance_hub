@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FreelanceHub</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="/"><i class="fas fa-handshake"></i> FreelanceHub</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="#" class="nav-link active">Dashboard</a>
+                <div class="nav-auth" id="nav-auth">
+                    <div class="user-menu">
+                        <span id="user-greeting">Welcome!</span>
+                        <button class="btn-primary" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-menu" id="sidebar-menu">
+                <!-- Dynamic menu items will be loaded here -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1 id="dashboard-title">Dashboard</h1>
+                <div class="dashboard-actions" id="dashboard-actions">
+                    <!-- Dynamic action buttons will be loaded here -->
+                </div>
+            </div>
+
+            <div class="dashboard-content" id="dashboard-content">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Job Post Modal -->
+    <div id="job-post-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('job-post-modal')">&times;</span>
+            <h2>Post a New Job</h2>
+            <form id="job-post-form">
+                <div class="form-group">
+                    <label for="job-title">Job Title</label>
+                    <input type="text" id="job-title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="job-description">Description</label>
+                    <textarea id="job-description" name="description" rows="5" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="job-category">Category</label>
+                        <select id="job-category" name="category_id" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-type">Job Type</label>
+                        <select id="job-type" name="job_type" required>
+                            <option value="">Select Type</option>
+                            <option value="fixed">Fixed Price</option>
+                            <option value="hourly">Hourly</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row" id="budget-fields">
+                    <div class="form-group">
+                        <label for="budget-min">Min Budget ($)</label>
+                        <input type="number" id="budget-min" name="budget_min" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="budget-max">Max Budget ($)</label>
+                        <input type="number" id="budget-max" name="budget_max" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="form-row" id="hourly-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="hourly-min">Min Hourly Rate ($)</label>
+                        <input type="number" id="hourly-min" name="hourly_rate_min" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="hourly-max">Max Hourly Rate ($)</label>
+                        <input type="number" id="hourly-max" name="hourly_rate_max" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience-level">Experience Level</label>
+                    <select id="experience-level" name="experience_level" required>
+                        <option value="">Select Level</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="skills-required">Skills Required</label>
+                    <input type="text" id="skills-required" name="skills_required" placeholder="e.g., Python, Django, React">
+                </div>
+                
+                <div class="form-group">
+                    <label for="deadline">Deadline (Optional)</label>
+                    <input type="date" id="deadline" name="deadline">
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Post Job</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Edit Modal -->
+    <div id="profile-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('profile-edit-modal')">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="profile-edit-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-first-name">First Name</label>
+                        <input type="text" id="edit-first-name" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-last-name">Last Name</label>
+                        <input type="text" id="edit-last-name" name="last_name">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-email">Email</label>
+                    <input type="email" id="edit-email" name="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-phone">Phone</label>
+                    <input type="tel" id="edit-phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-bio">Bio</label>
+                    <textarea id="edit-bio" name="bio" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-location">Location</label>
+                    <input type="text" id="edit-location" name="location">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-website">Website</label>
+                    <input type="url" id="edit-website" name="website">
+                </div>
+                
+                <!-- Freelancer specific fields -->
+                <div id="freelancer-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="edit-skills">Skills</label>
+                        <input type="text" id="edit-skills" name="skills" placeholder="e.g., Python, Django, React">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-hourly-rate">Hourly Rate ($)</label>
+                            <input type="number" id="edit-hourly-rate" name="hourly_rate" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-experience">Experience (Years)</label>
+                            <input type="number" id="edit-experience" name="experience_years" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-portfolio">Portfolio URL</label>
+                        <input type="url" id="edit-portfolio" name="portfolio_url">
+                    </div>
+                </div>
+                
+                <!-- Recruiter specific fields -->
+                <div id="recruiter-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="edit-company">Company Name</label>
+                        <input type="text" id="edit-company" name="company_name">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-company-size">Company Size</label>
+                            <input type="text" id="edit-company-size" name="company_size">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-industry">Industry</label>
+                            <input type="text" id="edit-industry" name="industry">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-company-desc">Company Description</label>
+                        <textarea id="edit-company-desc" name="company_description" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Update Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

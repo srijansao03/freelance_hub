@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceHub - Connect. Collaborate. Create.</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-handshake"></i> FreelanceHub</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#jobs" class="nav-link">Find Jobs</a>
+                <a href="#freelancers" class="nav-link">Find Freelancers</a>
+                <a href="#about" class="nav-link">About</a>
+                <div class="nav-auth">
+                    <button class="btn-secondary" onclick="showLoginModal()">Login</button>
+                    <button class="btn-primary" onclick="showRegisterModal()">Sign Up</button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Find the Perfect Freelancer or Your Next Great Job</h1>
+            <p>Connect with talented professionals worldwide and build amazing projects together</p>
+            <div class="hero-buttons">
+                <button class="btn-primary btn-large" onclick="showRegisterModal('freelancer')">
+                    <i class="fas fa-user"></i> I'm a Freelancer
+                </button>
+                <button class="btn-secondary btn-large" onclick="showRegisterModal('recruiter')">
+                    <i class="fas fa-briefcase"></i> I'm Hiring
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>10K+</h3>
+                    <p>Active Freelancers</p>
+                </div>
+                <div class="stat">
+                    <h3>5K+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Companies Trust Us</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Search Section -->
+    <section id="jobs" class="jobs-section">
+        <div class="container">
+            <h2>Latest Job Opportunities</h2>
+            
+            <!-- Search and Filters -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="job-search" placeholder="Search jobs by title, skills, or description...">
+                </div>
+                <div class="filters">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select id="job-type-filter">
+                        <option value="">Job Type</option>
+                        <option value="fixed">Fixed Price</option>
+                        <option value="hourly">Hourly</option>
+                    </select>
+                    <select id="experience-filter">
+                        <option value="">Experience Level</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                    <button class="btn-primary" onclick="searchJobs()">Search</button>
+                </div>
+            </div>
+
+            <!-- Job Listings -->
+            <div class="jobs-grid" id="jobs-container">
+                <!-- Jobs will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Freelancers Section -->
+    <section id="freelancers" class="freelancers-section">
+        <div class="container">
+            <h2>Top Freelancers</h2>
+            <div class="freelancers-grid" id="freelancers-container">
+                <!-- Freelancers will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Why Choose FreelanceHub?</h2>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure Payments</h3>
+                            <p>Safe and secure payment processing with escrow protection</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-star"></i>
+                            <h3>Quality Assurance</h3>
+                            <p>Verified freelancers with ratings and reviews from real clients</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-headset"></i>
+                            <h3>24/7 Support</h3>
+                            <p>Round-the-clock customer support to help you succeed</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe"></i>
+                            <h3>Global Talent</h3>
+                            <p>Access to freelancers from around the world</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-handshake"></i> FreelanceHub</h3>
+                    <p>Connecting talent with opportunity worldwide</p>
+                </div>
+                <div class="footer-section">
+                    <h4>For Freelancers</h4>
+                    <ul>
+                        <li><a href="#">Find Jobs</a></li>
+                        <li><a href="#">Build Profile</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Find Freelancers</a></li>
+                        <li><a href="#">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FreelanceHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Login to FreelanceHub</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username or Email</label>
+                    <input type="text" id="login-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary btn-full">Login</button>
+            </form>
+            
+            <!-- Google Sign-in Section -->
+            <div class="social-login">
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                <a href="/accounts/google/login/" class="google-signin-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </a>
+            </div>
+            
+            <p class="modal-footer">Don't have an account? <a href="#" onclick="switchModal('login-modal', 'register-modal')">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('register-modal')">&times;</span>
+            <h2>Join FreelanceHub</h2>
+            <form id="register-form">
+                <div class="user-type-selector">
+                    <label class="user-type">
+                        <input type="radio" name="user_type" value="freelancer" checked>
+                        <div class="user-type-card">
+                            <i class="fas fa-user"></i>
+                            <h3>Freelancer</h3>
+                            <p>Find great projects to work on</p>
+                        </div>
+                    </label>
+                    <label class="user-type">
+                        <input type="radio" name="user_type" value="recruiter">
+                        <div class="user-type-card">
+                            <i class="fas fa-briefcase"></i>
+                            <h3>Client</h3>
+                            <p>Hire skilled freelancers</p>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last_name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password-confirm">Confirm Password</label>
+                    <input type="password" id="password-confirm" name="password_confirm" required>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Create Account</button>
+            </form>
+            
+            <!-- Google Sign-in Section -->
+            <div class="social-login">
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                <a href="/accounts/google/login/" class="google-signin-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </a>
+            </div>
+            
+            <p class="modal-footer">Already have an account? <a href="#" onclick="switchModal('register-modal', 'login-modal')">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Job Application Modal -->
+    <div id="apply-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('apply-modal')">&times;</span>
+            <h2>Apply for Job</h2>
+            <form id="apply-form">
+                <input type="hidden" id="apply-job-id" name="job_id">
+                <div class="form-group">
+                    <label for="cover-letter">Cover Letter</label>
+                    <textarea id="cover-letter" name="cover_letter" rows="5" placeholder="Tell the client why you're the perfect fit for this job..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="proposed-rate">Proposed Rate ($)</label>
+                    <input type="number" id="proposed-rate" name="proposed_rate" step="0.01" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="estimated-duration">Estimated Duration</label>
+                    <input type="text" id="estimated-duration" name="estimated_duration" placeholder="e.g., 2 weeks, 1 month">
+                </div>
+                <button type="submit" class="btn-primary btn-full">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
