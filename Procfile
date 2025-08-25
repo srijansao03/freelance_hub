@@ -1,1 +1,1 @@
-web: gunicorn freelance_platform.wsgi
+web: gunicorn freelance_platform.wsgi:application --bind 0.0.0.0:$PORT
