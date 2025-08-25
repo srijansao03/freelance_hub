@@ -1,8 +1,11 @@
+[phases.setup]
+nixPkgs = ["python312", "python312Packages.pip"]
+
 [phases.install]
-cmds = ["pip install -r requirements.txt"]
+cmds = ["python -m pip install --upgrade pip", "python -m pip install -r requirements.txt"]
 
 [phases.build]
-cmds = ["python manage.py collectstatic --noinput"]
+cmds = ["python manage.py collectstatic --noinput --clear"]
 
 [start]
 cmd = "gunicorn freelance_platform.wsgi:application --bind 0.0.0.0:$PORT"
