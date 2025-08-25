@@ -22,14 +22,15 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),  # Google OAuth URLs
     path('api/accounts/', include('accounts.urls')),
     path('api/jobs/', include('jobs.urls')),
     path('api/applications/', include('applications.urls')),
+    path('accounts/', include('allauth.urls')),
     path('dashboard/', TemplateView.as_view(template_name='dashboard.html'), name='dashboard'),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
 ]
 
+# Serve static and media files during development
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
